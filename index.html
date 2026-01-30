@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramuka Angka Pemberani - KING Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 20, 147, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, 
+                rgba(255, 105, 180, 0.9) 0%,
+                rgba(255, 215, 0, 0.9) 25%,
+                rgba(0, 191, 255, 0.9) 50%,
+                rgba(138, 43, 226, 0.9) 75%,
+                rgba(50, 205, 50, 0.9) 100%);
+            border-radius: 25px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #ffd700;
+            animation: headerGlow 3s infinite alternate;
+        }
+        
+        @keyframes headerGlow {
+            0% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 20, 147, 0.6); }
+        }
+        
+        h1 {
+            color: white;
+            text-shadow: 
+                3px 3px 0 #ff1493,
+                6px 6px 0 #00bfff,
+                9px 9px 0 rgba(0, 0, 0, 0.3);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #ffd700, #ff69b4, #00bfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleShine 2s infinite alternate;
+        }
+        
+        @keyframes titleShine {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .subtitle {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+        }
+        
+        .king-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #8b0000;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+            animation: badgeBounce 2s infinite;
+        }
+        
+        @keyframes badgeBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .game-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .game-screen {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            border: 3px solid #00bfff;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stats-panel {
+            flex: 0 0 320px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.9), rgba(75, 0, 130, 0.9));
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 3px solid #ff69b4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 20%);
+            animation: sparkle 4s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .character {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #00bfff;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            border: 4px solid #ffd700;
+            box-shadow: 
+                0 0 25px rgba(255, 20, 147, 0.7),
+                inset 0 0 15px rgba(255, 255, 255, 0.3);
+            animation: avatarFloat 3s infinite ease-in-out;
+        }
+        
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .avatar i {
+            color: white;
+            font-size: 3.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .character-info h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .character-info p {
+            color: #87ceeb;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00bfff, #1e90ff);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.5);
+        }
+        
+        .stats {
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat {
+            margin-bottom: 25px;
+        }
+        
+        .stat-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #ffd700;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .stat-bar {
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            border-radius: 13px;
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .sku-fill {
+            background: linear-gradient(90deg, #ff1493, #ff69b4);
+            width: 80%;
+        }
+        
+        .exp-fill {
+            background: linear-gradient(90deg, #00bfff, #1e90ff);
+            width: 45%;
+        }
+        
+        .score-display {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 25px 0;
+            border: 2px solid #ffd700;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+        
+        .score-display div {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .score-display span {
+            font-size: 2.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #ffd700, #ff69b4, #00bfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .badges {
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badges h4 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4a4a4a, #2c2c2c);
+            color: #666;
+            font-size: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .badge::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, #ffd700, #ff69b4, #00bfff);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .badge.earned {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #8b0000;
+            box-shadow: 
+                0 0 25px rgba(255, 215, 0, 0.6),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: #ff1493;
+            transform: scale(1.15);
+        }
+        
+        .badge.earned::before {
+            opacity: 1;
+        }
+        
+        .badge.earned:hover {
+            transform: scale(1.3) rotate(15deg);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
+        }
+        
+        .instructions {
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.15), rgba(255, 105, 180, 0.15));
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 35px;
+            border: 2px solid #00bfff;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+        
+        .instructions h3 {
+            color: #ffd700;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ul {
+            padding-left: 25px;
+            color: #87ceeb;
+        }
+        
+        .instructions li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .instructions li::marker {
+            color: #ff69b4;
+            font-size: 1.2em;
+        }
+        
+        .level-info {
+            background: linear-gradient(135deg, 
+                rgba(255, 20, 147, 0.15), 
+                rgba(0, 191, 255, 0.15), 
+                rgba(255, 215, 0, 0.15));
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 3px solid #ff69b4;
+            position: relative;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .level-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff1493, #00bfff, #ffd700);
+        }
+        
+        .level-title {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .level-desc {
+            color: #87ceeb;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .environment-display {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.8));
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: #ffd700;
+            border: 2px solid #ff69b4;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .question-container {
+            background: linear-gradient(135deg, 
+                rgba(255, 105, 180, 0.1), 
+                rgba(0, 191, 255, 0.1));
+            padding: 35px;
+            border-radius: 25px;
+            margin-bottom: 35px;
+            text-align: center;
+            border: 3px solid #00bfff;
+            box-shadow: 
+                0 15px 30px rgba(0, 191, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .question {
+            font-size: 2.8rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 
+                3px 3px 0 #ff1493,
+                6px 6px 0 rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: questionPulse 2s infinite alternate;
+        }
+        
+        @keyframes questionPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+        
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .answer-btn {
+            padding: 25px 20px;
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 10px 0 #4b0082,
+                0 15px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .answer-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 15px 0 #4b0082,
+                0 25px 35px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #9b30ff, #5a0099);
+        }
+        
+        .answer-btn:hover::before {
+            left: 100%;
+        }
+        
+        .answer-btn:active {
+            transform: translateY(5px);
+            box-shadow: 
+                0 5px 0 #4b0082,
+                0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.1s ease;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .control-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .control-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            box-shadow: 
+                0 10px 0 #c71585,
+                0 15px 25px rgba(255, 20, 147, 0.3);
+            border: 2px solid #ffd700;
+        }
+        
+        .secondary-btn {
+            background: linear-gradient(135deg, #00bfff, #1e90ff);
+            color: white;
+            box-shadow: 
+                0 10px 0 #1c86ee,
+                0 15px 25px rgba(0, 191, 255, 0.3);
+            border: 2px solid #ffd700;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 15px 0 rgba(0, 0, 0, 0.4),
+                0 25px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(4px) scale(0.98);
+            box-shadow: 
+                0 4px 0 rgba(0, 0, 0, 0.4),
+                0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.1s ease;
+        }
+        
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .feedback-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .feedback-content {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, 
+                rgba(255, 20, 147, 0.95), 
+                rgba(255, 215, 0, 0.95), 
+                rgba(0, 191, 255, 0.95));
+            border-radius: 30px;
+            border: 5px solid white;
+            box-shadow: 
+                0 0 80px rgba(255, 215, 0, 0.8),
+                0 30px 60px rgba(0, 0, 0, 0.6);
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feedback-overlay.active .feedback-content {
+            transform: scale(1);
+        }
+        
+        .feedback-content h2 {
+            font-size: 4.5rem;
+            color: white;
+            text-shadow: 
+                4px 4px 0 #ff1493,
+                8px 8px 0 rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            animation: feedbackText 0.5s ease infinite alternate;
+        }
+        
+        @keyframes feedbackText {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .feedback-content.correct h2 {
+            background: linear-gradient(to right, #ffd700, #ff69b4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feedback-content.incorrect h2 {
+            background: linear-gradient(to right, #00bfff, #1e90ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feedback-emojis {
+            font-size: 5rem;
+            margin: 30px 0;
+            animation: emojiBounce 1s infinite alternate;
+        }
+        
+        @keyframes emojiBounce {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .scene-element {
+            position: absolute;
+            font-size: 4rem;
+            filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.5));
+            opacity: 0.7;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .emojis-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .emoji {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: emojiFloat 10s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes emojiFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .overlay-content {
+            background: linear-gradient(135deg, 
+                rgba(255, 20, 147, 0.95), 
+                rgba(0, 191, 255, 0.95));
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 600px;
+            border: 5px solid #ffd700;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .overlay-content h2 {
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 0 #ff1493;
+        }
+        
+        .overlay-content p {
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .overlay-score {
+            font-size: 3rem;
+            color: #ffd700;
+            margin: 30px 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .overlay-emojis {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+        
+        .countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0c29, #302b63);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .countdown-content {
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 15rem;
+            background: linear-gradient(to right, #ffd700, #ff69b4, #00bfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 40px 0;
+            font-weight: bold;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            animation: countdownPulse 1s infinite;
+        }
+        
+        @keyframes countdownPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.1); filter: brightness(1.3); }
+        }
+        
+        .start-text {
+            font-size: 8rem;
+            background: linear-gradient(to right, #ff1493, #00bfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 40px 0;
+            font-weight: bold;
+            text-shadow: 
+                0 0 60px rgba(255, 20, 147, 0.8),
+                0 0 90px rgba(0, 191, 255, 0.6);
+            animation: startGlow 1.5s infinite alternate;
+        }
+        
+        @keyframes startGlow {
+            0% { 
+                filter: hue-rotate(0deg) brightness(1);
+                transform: scale(1);
+            }
+            100% { 
+                filter: hue-rotate(360deg) brightness(1.5);
+                transform: scale(1.1);
+            }
+        }
+        
+        .time-display {
+            background: linear-gradient(135deg, 
+                rgba(255, 20, 147, 0.2), 
+                rgba(0, 191, 255, 0.2));
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 3px solid #ffd700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+        
+        .time-display span {
+            color: #ffd700;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        
+        .time-label {
+            color: #87ceeb;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4a4a4a;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+        
+        .progress-dot.active {
+            background: #00bfff;
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+        }
+        
+        .progress-dot.completed {
+            background: #ff69b4;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+        }
+        
+        @media (max-width: 1024px) {
+            .game-area {
+                flex-direction: column;
+            }
+            
+            .stats-panel {
+                order: -1;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                min-width: 100%;
+            }
+            
+            .countdown-number {
+                font-size: 10rem;
+            }
+            
+            .start-text {
+                font-size: 5rem;
+            }
+            
+            .feedback-content h2 {
+                font-size: 3rem;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px solid #ff69b4;
+            color: #87ceeb;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        footer p:first-child {
+            font-size: 1.2rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.8);
+            border-radius: 50%;
+            animation: particleFloat 20s linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% { 
+                transform: translateY(100vh) translateX(0); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) translateX(100px); 
+                opacity: 0; 
+            }
+        }
+        
+        .level-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 20, 147, 0.9), 
+                rgba(0, 191, 255, 0.9), 
+                rgba(255, 215, 0, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .level-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .transition-content {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 30px;
+            border: 5px solid #ffd700;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+        }
+        
+        .level-transition.active .transition-content {
+            transform: scale(1);
+        }
+        
+        .transition-content h2 {
+            color: #ffd700;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 0 #ff1493;
+        }
+        
+        .transition-content p {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        
+        .transition-emojis {
+            font-size: 5rem;
+            animation: transitionEmoji 1s infinite alternate;
+        }
+        
+        @keyframes transitionEmoji {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.2) rotate(360deg); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="emojis-container" id="emojis-container"></div>
+    
+    <div class="countdown-overlay" id="countdown-overlay">
+        <div class="countdown-content">
+            <h2 style="color: #ffd700; font-size: 4rem; margin-bottom: 40px; text-shadow: 3px 3px 0 #ff1493;">PETUALANGAN KING DIMULAI!</h2>
+            <div class="countdown-number" id="countdown-number">3</div>
+            <div class="start-text" id="start-text" style="display: none;">DIMULAI!</div>
+        </div>
+    </div>
+    
+    <div class="level-transition" id="level-transition">
+        <div class="transition-content">
+            <h2 id="transition-title">LEVEL BARU!</h2>
+            <p id="transition-text">Bersiaplah untuk petualangan berikutnya!</p>
+            <div class="transition-emojis" id="transition-emojis">🏕️🔥🌟</div>
+        </div>
+    </div>
+    
+    <div class="feedback-overlay" id="feedback-overlay">
+        <div class="feedback-content" id="feedback-content">
+            <h2 id="feedback-text">MENYALA KINGGG! 🔥</h2>
+            <div class="feedback-emojis" id="feedback-emojis">👑🔥🎯💯🌟</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-campground"></i> PRAMUKA ANGKA PEMBERANI</h1>
+            <p class="subtitle">Petualangan Matematika Epik dengan Semangat KING! 👑</p>
+            <div class="king-badge">KING EDITION 👑</div>
+        </header>
+        
+        <div class="game-area">
+            <div class="game-screen">
+                <!-- Environment display -->
+                <div class="environment-display" id="environment-display">
+                    <i class="fas fa-tree" id="environment-icon"></i>
+                    <span id="location-name">BASE CAMP PRAMUKA</span>
+                </div>
+                
+                <!-- Scene elements -->
+                <div class="scene" id="scene">
+                    <!-- Elements will be added dynamically -->
+                </div>
+                
+                <!-- Level information -->
+                <div class="level-info">
+                    <h2 class="level-title" id="level-title">
+                        <i class="fas fa-map-signs"></i>
+                        <span id="level-title-text">LEVEL 1: BASE CAMP AWAL</span>
+                    </h2>
+                    <p class="level-desc" id="level-desc">Siapkan diri untuk petualangan matematika epik! Tunjukkan skill KING-mu! 👑</p>
+                </div>
+                
+                <!-- Progress indicator -->
+                <div class="progress-indicator" id="progress-indicator">
+                    <!-- Dots will be added dynamically -->
+                </div>
+                
+                <!-- Time display -->
+                <div class="time-display">
+                    <div class="time-label"><i class="fas fa-hourglass-half"></i> WAKTU KING:</div>
+                    <span id="time">60</span>
+                </div>
+                
+                <!-- Question area -->
+                <div class="question-container">
+                    <p class="question" id="question-text">5 + 3 = ?</p>
+                    <div class="answer-options" id="answer-options">
+                        <!-- Answer buttons will be generated here -->
+                    </div>
+                </div>
+                
+                <!-- Game controls -->
+                <div class="game-controls">
+                    <button class="control-btn primary-btn" id="hint-btn">
+                        <i class="fas fa-lightbulb"></i> PETUNJUK KING 👑
+                    </button>
+                    <button class="control-btn secondary-btn" id="restart-btn">
+                        <i class="fas fa-redo"></i> RESTART LEVEL 🔄
+                    </button>
+                </div>
+                
+                <!-- Game over overlay -->
+                <div class="game-overlay" id="game-overlay">
+                    <div class="overlay-content">
+                        <h2 id="overlay-title">NICE TRY KING! 👑</h2>
+                        <p id="overlay-text">Kamu hampir berhasil! Ayo coba lagi dan tunjukkan skill KING-mu!</p>
+                        <div class="overlay-emojis">😢👑💪🔥</div>
+                        <div class="overlay-score" id="overlay-score">SKOR: 0</div>
+                        <div class="game-controls">
+                            <button class="control-btn primary-btn" id="next-level-btn">
+                                <i class="fas fa-arrow-right"></i> LANJUT PETUALANGAN 🚀
+                            </button>
+                            <button class="control-btn secondary-btn" id="menu-btn">
+                                <i class="fas fa-home"></i> KEMBALI KE BASE CAMP 🏕️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-panel">
+                <div class="character">
+                    <div class="avatar">
+                        <i class="fas fa-crown" style="color: white;"></i>
+                    </div>
+                    <div class="character-info">
+                        <h3>KING PRAMUKA 👑</h3>
+                        <p>Pramuka Legendaris Matematika</p>
+                        <span class="level-badge" id="level-badge">LEVEL 1 KING</span>
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-label">
+                            <span><i class="fas fa-fire"></i> ENERGY KING</span>
+                            <span id="sku-value">15/15</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="stat-fill sku-fill" id="sku-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-label">
+                            <span><i class="fas fa-trophy"></i> XP KING</span>
+                            <span id="exp-value">0/100</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="stat-fill exp-fill" id="exp-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="score-display">
+                        <div>SKOR KING 👑</div>
+                        <span id="score-value">0</span>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-label">
+                            <span><i class="fas fa-check-double"></i> SOAL TERSELESAIKAN</span>
+                            <span id="solved-value">0/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="badges">
+                    <h4><i class="fas fa-medal"></i> KOLEKSI LENCANA KING 👑</h4>
+                    <div class="badge-container">
+                        <div class="badge" id="badge-1"><i class="fas fa-campground"></i></div>
+                        <div class="badge" id="badge-2"><i class="fas fa-tree"></i></div>
+                        <div class="badge" id="badge-3"><i class="fas fa-water"></i></div>
+                        <div class="badge" id="badge-4"><i class="fas fa-mountain"></i></div>
+                        <div class="badge" id="badge-5"><i class="fas fa-gem"></i></div>
+                        <div class="badge" id="badge-6"><i class="fas fa-fire"></i></div>
+                        <div class="badge" id="badge-7"><i class="fas fa-crown"></i></div>
+                        <div class="badge" id="badge-8"><i class="fas fa-trophy"></i></div>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> PETUNJUK KING 👑</h3>
+                    <ul>
+                        <li><strong>🔥 MENYALA KINGGG!</strong> - Jawaban benar</li>
+                        <li><strong>😢 WAH COBA LAGI KING</strong> - Jawaban salah</li>
+                        <li><strong>👑 NICE TRY KING</strong> - Level gagal</li>
+                        <li>Gunakan angka 1-4 untuk jawaban cepat</li>
+                        <li>Semakin cepat jawab, semakin tinggi skor!</li>
+                        <li>Kumpulkan semua lencana untuk jadi KING sejati! 👑</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🔥 GAME PRAMUKA ANGKA PEMBERANI - KING EDITION 👑 © 2023 🔥</p>
+            <p>Semangat KING: SELALU MENYALA, TAK PERNAH PADAM! 🔥👑💯</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===================== KING CONFIGURATION =====================
+        const KING_CONFIG = {
+            colors: {
+                primary: ['#ff1493', '#ff69b4', '#ffd700', '#00bfff', '#8a2be2'],
+                secondary: ['#c71585', '#1e90ff', '#4b0082', '#32cd32', '#ff4500']
+            },
+            emojis: {
+                success: ['👑', '🔥', '🎯', '💯', '🌟', '🚀', '🏆', '✨', '💪', '😎'],
+                failure: ['😢', '😅', '🤔', '😓', '💔', '⏳', '🙏', '🤞'],
+                pramuka: ['🏕️', '🔥', '🧭', '🎒', '🧗', '🚣', '🧸', '🎖️', '🔦', '🧩'],
+                general: ['⭐', '🌈', '🎨', '🎪', '🎭', '🎮', '🤹', '🎸', '🥇', '🏅']
+            },
+            phrases: {
+                correct: [
+                    "MENYALA KINGGG! 🔥",
+                    "GILA LU KING! 💯",
+                    "MANTAP KING! 👑",
+                    "SUPER KING! 🚀",
+                    "LEGENDARY KING! 🏆"
+                ],
+                incorrect: [
+                    "WAH COBA LAGI KING 😢",
+                    "HAMPIR KING! 💔",
+                    "SEDIKIT LAGI KING! 🤔",
+                    "UPGRADE SKILL KING! 💪",
+                    "NEXT TIME KING! 🔄"
+                ],
+                levelFailed: "NICE TRY KING! 👑",
+                levelComplete: "KING LEVEL COMPLETE! 🏆"
+            }
+        };
+
+        // ===================== GAME STATE =====================
+        const gameState = {
+            level: 1,
+            sku: 15,
+            maxSku: 15,
+            exp: 0,
+            maxExp: 100,
+            score: 0,
+            questionsSolved: 0,
+            questionsPerLevel: 5,
+            timeLeft: 60,
+            timer: null,
+            gameActive: false,
+            badges: [true, false, false, false, false, false, false, false],
+            currentStreak: 0,
+            maxStreak: 0,
+            totalCorrect: 0,
+            totalQuestions: 0,
+            environments: [
+                { 
+                    name: "BASE CAMP PRAMUKA 🏕️", 
+                    icon: "fa-campground", 
+                    color: "#ff8c00",
+                    emojis: ["🏕️", "🔥", "🎒", "🧭", "🔦"]
+                },
+                { 
+                    name: "HUTAN MISTERI 🌳", 
+                    icon: "fa-tree", 
+                    color: "#228b22",
+                    emojis: ["🌳", "🐿️", "🍃", "🦉", "🌲"]
+                },
+                { 
+                    name: "DANAU JERNIH 🌊", 
+                    icon: "fa-water", 
+                    color: "#1e90ff",
+                    emojis: ["🌊", "💧", "🚣", "🐟", "🌅"]
+                },
+                { 
+                    name: "GUNUNG TINGGI ⛰️", 
+                    icon: "fa-mountain", 
+                    color: "#808080",
+                    emojis: ["⛰️", "🧗", "🏔️", "🌄", "🧗‍♂️"]
+                },
+                { 
+                    name: "GOA RAHASIA 🕳️", 
+                    icon: "fa-gem", 
+                    color: "#8a2be2",
+                    emojis: ["🕳️", "💎", "🦇", "🔮", "✨"]
+                },
+                { 
+                    name: "SUNGAI DERAS 🌊", 
+                    icon: "fa-water", 
+                    color: "#00ced1",
+                    emojis: ["🌊", "💦", "🚤", "🐠", "🌉"]
+                },
+                { 
+                    name: "PADANG RUMPUT 🌾", 
+                    icon: "fa-seedling", 
+                    color: "#32cd32",
+                    emojis: ["🌾", "🐇", "🌼", "🦗", "🌻"]
+                },
+                { 
+                    name: "PERKEMAHAN MALAM 🌙", 
+                    icon: "fa-moon", 
+                    color: "#191970",
+                    emojis: ["🌙", "⭐", "🔥", "🏕️", "🔭"]
+                },
+                { 
+                    name: "JEMBATAN GANTUNG 🌉", 
+                    icon: "fa-bridge", 
+                    color: "#8b4513",
+                    emojis: ["🌉", "🌁", "🌀", "🌊", "🧗"]
+                },
+                { 
+                    name: "ISTANA KING 👑", 
+                    icon: "fa-crown", 
+                    color: "#ffd700",
+                    emojis: ["👑", "🏰", "🎯", "🏆", "✨"]
+                }
+            ]
+        };
+
+        // ===================== LEVEL CONFIGURATIONS =====================
+        const levels = [
+            {
+                title: "LEVEL 1: BASE CAMP AWAL 🏕️",
+                description: "Siapkan diri di base camp! Pelajari dasar-dasar matematika sebelum petualangan dimulai! 🔥",
+                operation: "addition",
+                environment: 0,
+                difficulty: 1,
+                time: 60
+            },
+            {
+                title: "LEVEL 2: JELAJAH HUTAN 🌳",
+                description: "Masuk ke hutan misterius! Hadapi tantangan penjumlahan yang lebih sulit! 🐿️",
+                operation: "addition",
+                environment: 1,
+                difficulty: 2,
+                time: 55
+            },
+            {
+                title: "LEVEL 3: TEKA-TEKI DANAU 🌊",
+                description: "Seberangi danau dengan menyelesaikan teka-teki pengurangan! 🚣",
+                operation: "subtraction",
+                environment: 2,
+                difficulty: 2,
+                time: 50
+            },
+            {
+                title: "LEVEL 4: NAIK GUNUNG ⛰️",
+                description: "Daki gunung tinggi dengan menguasai perkalian dasar! 🧗",
+                operation: "multiplication",
+                environment: 3,
+                difficulty: 3,
+                time: 50
+            },
+            {
+                title: "LEVEL 5: RAHASIA GOA 🕳️",
+                description: "Temukan harta karun di goa dengan pembagian yang tepat! 💎",
+                operation: "division",
+                environment: 4,
+                difficulty: 3,
+                time: 45
+            },
+            {
+                title: "LEVEL 6: ARUS SUNGAI 🌊",
+                description: "Hadapi arus sungai deras dengan operasi campuran! 💦",
+                operation: "mixed",
+                environment: 5,
+                difficulty: 4,
+                time: 45
+            },
+            {
+                title: "LEVEL 7: LINTAS PADANG RUMPUT 🌾",
+                description: "Lintasi padang rumput dengan soal matematika kompleks! 🌼",
+                operation: "mixed",
+                environment: 6,
+                difficulty: 4,
+                time: 40
+            },
+            {
+                title: "LEVEL 8: PERKEMAHAN MALAM 🌙",
+                description: "Bertahan di perkemahan malam dengan tantangan ultimate! 🔥",
+                operation: "mixed",
+                environment: 7,
+                difficulty: 5,
+                time: 40
+            },
+            {
+                title: "LEVEL 9: JEMBATAN GANTUNG 🌉",
+                description: "Seberangi jembatan gantung dengan matematika tingkat tinggi! 🌁",
+                operation: "mixed",
+                environment: 8,
+                difficulty: 5,
+                time: 35
+            },
+            {
+                title: "LEVEL 10: ISTANA KING 👑",
+                description: "Masuki istana terakhir! Buktikan kamu adalah KING sejati matematika! 🏆",
+                operation: "mixed",
+                environment: 9,
+                difficulty: 6,
+                time: 35
+            }
+        ];
+
+        // ===================== DOM ELEMENTS =====================
+        const questionText = document.getElementById('question-text');
+        const answerOptions = document.getElementById('answer-options');
+        const gameOverlay = document.getElementById('game-overlay');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlayText = document.getElementById('overlay-text');
+        const overlayScore = document.getElementById('overlay-score');
+        const nextLevelBtn = document.getElementById('next-level-btn');
+        const menuBtn = document.getElementById('menu-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const timeDisplay = document.getElementById('time');
+        const countdownOverlay = document.getElementById('countdown-overlay');
+        const countdownNumber = document.getElementById('countdown-number');
+        const startText = document.getElementById('start-text');
+        const environmentDisplay = document.getElementById('environment-display');
+        const locationName = document.getElementById('location-name');
+        const environmentIcon = document.getElementById('environment-icon');
+        const scene = document.getElementById('scene');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const feedbackOverlay = document.getElementById('feedback-overlay');
+        const feedbackContent = document.getElementById('feedback-content');
+        const feedbackText = document.getElementById('feedback-text');
+        const feedbackEmojis = document.getElementById('feedback-emojis');
+        const levelTransition = document.getElementById('level-transition');
+        const transitionTitle = document.getElementById('transition-title');
+        const transitionText = document.getElementById('transition-text');
+        const transitionEmojis = document.getElementById('transition-emojis');
+        const particlesContainer = document.getElementById('particles');
+        const emojisContainer = document.getElementById('emojis-container');
+        
+        // Stats elements
+        const skuValue = document.getElementById('sku-value');
+        const skuBar = document.getElementById('sku-bar');
+        const expValue = document.getElementById('exp-value');
+        const expBar = document.getElementById('exp-bar');
+        const scoreValue = document.getElementById('score-value');
+        const solvedValue = document.getElementById('solved-value');
+        const levelTitleText = document.getElementById('level-title-text');
+        const levelDesc = document.getElementById('level-desc');
+        const levelBadge = document.getElementById('level-badge');
+        
+        // ===================== UTILITY FUNCTIONS =====================
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function playSound(frequency, duration, type = 'sine') {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration / 1000);
+            } catch (e) {
+                console.log("Audio not supported");
+            }
+        }
+        
+        function createParticles() {
+            particlesContainer.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.background = getRandomItem(KING_CONFIG.colors.primary);
+                particle.style.width = `${Math.random() * 4 + 2}px`;
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        function createFloatingEmojis() {
+            emojisContainer.innerHTML = '';
+            const allEmojis = [
+                ...KING_CONFIG.emojis.success,
+                ...KING_CONFIG.emojis.failure,
+                ...KING_CONFIG.emojis.pramuka,
+                ...KING_CONFIG.emojis.general
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.textContent = getRandomItem(allEmojis);
+                emoji.style.left = `${Math.random() * 100}%`;
+                emoji.style.animationDelay = `${Math.random() * 10}s`;
+                emoji.style.fontSize = `${Math.random() * 2 + 2}rem`;
+                emoji.style.color = getRandomItem(KING_CONFIG.colors.primary);
+                emojisContainer.appendChild(emoji);
+            }
+        }
+        
+        // ===================== GAME FUNCTIONS =====================
+        function showFeedback(isCorrect) {
+            feedbackContent.className = `feedback-content ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackText.textContent = isCorrect ? 
+                getRandomItem(KING_CONFIG.phrases.correct) : 
+                getRandomItem(KING_CONFIG.phrases.incorrect);
+            
+            const emojiSet = isCorrect ? KING_CONFIG.emojis.success : KING_CONFIG.emojis.failure;
+            feedbackEmojis.textContent = shuffleArray([...emojiSet]).slice(0, 5).join('');
+            
+            feedbackOverlay.classList.add('active');
+            
+            // Play sound
+            if (isCorrect) {
+                playSound(800, 200);
+                setTimeout(() => playSound(1000, 150), 100);
+                setTimeout(() => playSound(1200, 100), 200);
+            } else {
+                playSound(300, 500);
+            }
+            
+            setTimeout(() => {
+                feedbackOverlay.classList.remove('active');
+            }, 1500);
+        }
+        
+        function showLevelTransition() {
+            const level = levels[gameState.level - 1];
+            const environment = gameState.environments[level.environment];
+            
+            transitionTitle.textContent = level.title.split(':')[0];
+            transitionText.textContent = `Menuju ${environment.name}`;
+            transitionEmojis.textContent = environment.emojis.slice(0, 3).join('');
+            
+            levelTransition.classList.add('active');
+            
+            // Play transition sound
+            playSound(600, 300);
+            setTimeout(() => playSound(800, 200), 300);
+            setTimeout(() => playSound(1000, 100), 600);
+            
+            setTimeout(() => {
+                levelTransition.classList.remove('active');
+            }, 2000);
+        }
+        
+        function startCountdown() {
+            let count = 3;
+            countdownNumber.textContent = count;
+            countdownNumber.style.display = 'block';
+            startText.style.display = 'none';
+            
+            const countdownInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownNumber.textContent = count;
+                    playSound(800, 200);
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownNumber.style.display = 'none';
+                    startText.style.display = 'block';
+                    
+                    // Play epic start sound
+                    playSound(1200, 500);
+                    setTimeout(() => playSound(1400, 400), 100);
+                    setTimeout(() => playSound(1600, 300), 200);
+                    
+                    setTimeout(() => {
+                        countdownOverlay.style.display = 'none';
+                        gameState.gameActive = true;
+                        startTimer();
+                    }, 2000);
+                }
+            }, 1000);
+        }
+        
+        function initGame() {
+            gameState.level = 1;
+            gameState.sku = 15;
+            gameState.exp = 0;
+            gameState.score = 0;
+            gameState.questionsSolved = 0;
+            gameState.timeLeft = 60;
+            gameState.gameActive = false;
+            gameState.badges = [true, false, false, false, false, false, false, false];
+            gameState.currentStreak = 0;
+            gameState.maxStreak = 0;
+            gameState.totalCorrect = 0;
+            gameState.totalQuestions = 0;
+            
+            updateStats();
+            updateBadges();
+            loadLevel(gameState.level);
+            generateQuestion();
+            createProgressDots();
+            createParticles();
+            createFloatingEmojis();
+            
+            // Show countdown overlay
+            countdownOverlay.style.display = 'flex';
+            startCountdown();
+        }
+        
+        function loadLevel(levelNumber) {
+            const level = levels[levelNumber - 1];
+            const environment = gameState.environments[level.environment];
+            
+            levelTitleText.textContent = level.title;
+            levelDesc.textContent = level.description;
+            levelBadge.textContent = `LEVEL ${levelNumber} KING`;
+            
+            // Update environment display
+            locationName.textContent = environment.name;
+            environmentIcon.className = `fas ${environment.icon}`;
+            environmentDisplay.style.borderColor = environment.color;
+            environmentDisplay.style.background = `linear-gradient(135deg, ${environment.color}99, ${environment.color}66)`;
+            
+            // Update scene
+            scene.innerHTML = '';
+            
+            // Add environment-specific elements
+            environment.emojis.forEach((emoji, index) => {
+                const element = document.createElement('div');
+                element.className = 'scene-element';
+                element.textContent = emoji;
+                element.style.left = `${10 + (index * 15)}%`;
+                element.style.top = `${20 + (index * 10)}%`;
+                element.style.fontSize = `${3 + Math.random() * 2}rem`;
+                element.style.animationDelay = `${index * 0.5}s`;
+                element.style.color = getRandomItem(KING_CONFIG.colors.primary);
+                scene.appendChild(element);
+            });
+            
+            // Add some random decorative elements
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.className = 'scene-element';
+                element.textContent = getRandomItem(KING_CONFIG.emojis.pramuka);
+                element.style.left = `${Math.random() * 80 + 10}%`;
+                element.style.top = `${Math.random() * 60 + 20}%`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                element.style.animationDelay = `${Math.random() * 5}s`;
+                element.style.color = getRandomItem(KING_CONFIG.colors.secondary);
+                scene.appendChild(element);
+            }
+            
+            // Update badges
+            updateBadges();
+            
+            // Reset timer
+            gameState.timeLeft = level.time;
+            timeDisplay.textContent = gameState.timeLeft;
+        }
+        
+        function createProgressDots() {
+            progressIndicator.innerHTML = '';
+            for (let i = 0; i < gameState.questionsPerLevel; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot';
+                if (i < gameState.questionsSolved) {
+                    dot.classList.add('completed');
+                } else if (i === gameState.questionsSolved) {
+                    dot.classList.add('active');
+                }
+                progressIndicator.appendChild(dot);
+            }
+        }
+        
+        function updateProgressDots() {
+            const dots = document.querySelectorAll('.progress-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < gameState.questionsSolved) {
+                    dot.classList.add('completed');
+                } else if (index === gameState.questionsSolved) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        function generateQuestion() {
+            const level = levels[gameState.level - 1];
+            let num1, num2, correctAnswer, question;
+            
+            const difficulty = level.difficulty;
+            const baseNum = 5 + (difficulty * 3);
+            
+            switch(level.operation) {
+                case 'addition':
+                    num1 = Math.floor(Math.random() * baseNum) + difficulty;
+                    num2 = Math.floor(Math.random() * baseNum) + difficulty;
+                    correctAnswer = num1 + num2;
+                    question = `${num1} + ${num2} = ?`;
+                    break;
+                    
+                case 'subtraction':
+                    num1 = Math.floor(Math.random() * baseNum) + (difficulty * 2);
+                    num2 = Math.floor(Math.random() * (num1 - 1)) + 1;
+                    correctAnswer = num1 - num2;
+                    question = `${num1} - ${num2} = ?`;
+                    break;
+                    
+                case 'multiplication':
+                    num1 = Math.floor(Math.random() * (2 + difficulty)) + 2;
+                    num2 = Math.floor(Math.random() * (2 + difficulty)) + 2;
+                    correctAnswer = num1 * num2;
+                    question = `${num1} × ${num2} = ?`;
+                    break;
+                    
+                case 'division':
+                    num2 = Math.floor(Math.random() * (3 + difficulty)) + 2;
+                    num1 = num2 * (Math.floor(Math.random() * (3 + difficulty)) + 2);
+                    correctAnswer = num1 / num2;
+                    question = `${num1} ÷ ${num2} = ?`;
+                    break;
+                    
+                case 'mixed':
+                    const operations = ['+', '-', '×', '÷'];
+                    const op = getRandomItem(operations);
+                    
+                    if (op === '+') {
+                        num1 = Math.floor(Math.random() * (baseNum * 2)) + difficulty;
+                        num2 = Math.floor(Math.random() * (baseNum * 2)) + difficulty;
+                        correctAnswer = num1 + num2;
+                        question = `${num1} ${op} ${num2} = ?`;
+                    } else if (op === '-') {
+                        num1 = Math.floor(Math.random() * (baseNum * 2)) + (difficulty * 3);
+                        num2 = Math.floor(Math.random() * (num1 - 1)) + 1;
+                        correctAnswer = num1 - num2;
+                        question = `${num1} ${op} ${num2} = ?`;
+                    } else if (op === '×') {
+                        num1 = Math.floor(Math.random() * (3 + difficulty)) + 2;
+                        num2 = Math.floor(Math.random() * (3 + difficulty)) + 2;
+                        correctAnswer = num1 * num2;
+                        question = `${num1} ${op} ${num2} = ?`;
+                    } else {
+                        num2 = Math.floor(Math.random() * (3 + difficulty)) + 2;
+                        num1 = num2 * (Math.floor(Math.random() * (3 + difficulty)) + 2);
+                        correctAnswer = num1 / num2;
+                        question = `${num1} ${op} ${num2} = ?`;
+                    }
+                    break;
+            }
+            
+            questionText.textContent = question;
+            
+            // Generate answer options
+            const answers = [correctAnswer];
+            
+            while (answers.length < 4) {
+                let wrongAnswer;
+                do {
+                    const offset = Math.floor(Math.random() * (difficulty + 3)) + 1;
+                    const direction = Math.random() > 0.5 ? 1 : -1;
+                    wrongAnswer = correctAnswer + (offset * direction);
+                    
+                    if (wrongAnswer < 0) wrongAnswer = Math.abs(wrongAnswer) + 2;
+                    if (wrongAnswer === correctAnswer) wrongAnswer += 2;
+                } while (answers.includes(wrongAnswer));
+                
+                answers.push(wrongAnswer);
+            }
+            
+            shuffleArray(answers);
+            
+            // Display answer buttons
+            answerOptions.innerHTML = '';
+            answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'answer-btn';
+                button.textContent = answer;
+                button.dataset.key = index + 1;
+                button.addEventListener('click', () => checkAnswer(answer, correctAnswer));
+                answerOptions.appendChild(button);
+            });
+        }
+        
+        function checkAnswer(selectedAnswer, correctAnswer) {
+            if (!gameState.gameActive) return;
+            
+            gameState.totalQuestions++;
+            
+            if (selectedAnswer === correctAnswer) {
+                // CORRECT ANSWER - MENYALA KINGGG! 🔥
+                showFeedback(true);
+                
+                // Calculate score based on streak and time
+                const baseScore = 10 * gameState.level;
+                const streakBonus = gameState.currentStreak * 5;
+                const timeBonus = Math.floor(gameState.timeLeft / 10) * 2;
+                const totalScore = baseScore + streakBonus + timeBonus;
+                
+                gameState.score += totalScore;
+                gameState.exp += 15;
+                gameState.questionsSolved++;
+                gameState.currentStreak++;
+                gameState.maxStreak = Math.max(gameState.maxStreak, gameState.currentStreak);
+                gameState.totalCorrect++;
+                
+                // Add floating emoji for correct answer
+                const floatingEmoji = document.createElement('div');
+                floatingEmoji.className = 'emoji';
+                floatingEmoji.textContent = getRandomItem(KING_CONFIG.emojis.success);
+                floatingEmoji.style.left = `${Math.random() * 80 + 10}%`;
+                floatingEmoji.style.fontSize = '3rem';
+                floatingEmoji.style.color = getRandomItem(KING_CONFIG.colors.primary);
+                emojisContainer.appendChild(floatingEmoji);
+                
+                // Update progress
+                updateProgressDots();
+                
+                // Check if level is complete
+                if (gameState.questionsSolved >= gameState.questionsPerLevel) {
+                    setTimeout(() => completeLevel(), 1000);
+                } else {
+                    setTimeout(() => {
+                        generateQuestion();
+                    }, 1500);
+                }
+            } else {
+                // INCORRECT ANSWER - WAH COBA LAGI KING 😢
+                showFeedback(false);
+                
+                gameState.sku -= 3;
+                gameState.currentStreak = 0;
+                
+                // Add floating emoji for incorrect answer
+                const floatingEmoji = document.createElement('div');
+                floatingEmoji.className = 'emoji';
+                floatingEmoji.textContent = getRandomItem(KING_CONFIG.emojis.failure);
+                floatingEmoji.style.left = `${Math.random() * 80 + 10}%`;
+                floatingEmoji.style.fontSize = '3rem';
+                floatingEmoji.style.color = getRandomItem(KING_CONFIG.colors.secondary);
+                emojisContainer.appendChild(floatingEmoji);
+                
+                // Check if SKU is depleted
+                if (gameState.sku <= 0) {
+                    gameState.sku = 0;
+                    setTimeout(() => gameOver(), 1000);
+                } else {
+                    setTimeout(() => {
+                        generateQuestion();
+                    }, 1500);
+                }
+            }
+            
+            updateStats();
+        }
+        
+        function completeLevel() {
+            gameState.gameActive = false;
+            clearInterval(gameState.timer);
+            
+            // Earn badge for this level
+            if (gameState.level <= gameState.badges.length) {
+                gameState.badges[gameState.level - 1] = true;
+                updateBadges();
+            }
+            
+            // Check if it's the final level
+            if (gameState.level >= levels.length) {
+                overlayTitle.textContent = "KING OF MATHEMATICS! 👑🏆";
+                overlayText.textContent = "SELAMAT! Kamu telah menyelesaikan semua level dan menjadi KING sejati! 🔥";
+                nextLevelBtn.innerHTML = '<i class="fas fa-trophy"></i> ULANGI PETUALANGAN 🔄';
+                nextLevelBtn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
+            } else {
+                overlayTitle.textContent = "LEVEL COMPLETE! 🎯";
+                overlayText.textContent = `${KING_CONFIG.phrases.levelComplete} Lanjutkan petualanganmu!`;
+                nextLevelBtn.innerHTML = '<i class="fas fa-arrow-right"></i> LEVEL BERIKUTNYA 🚀';
+                nextLevelBtn.style.background = 'linear-gradient(135deg, #ff1493, #ff69b4)';
+            }
+            
+            overlayScore.textContent = `SKOR KING: ${gameState.score}`;
+            gameOverlay.style.display = 'flex';
+            
+            // Play victory sound
+            playSound(1000, 300);
+            setTimeout(() => playSound(1200, 250), 200);
+            setTimeout(() => playSound(1400, 200), 400);
+            setTimeout(() => playSound(1600, 150), 600);
+        }
+        
+        function gameOver() {
+            gameState.gameActive = false;
+            clearInterval(gameState.timer);
+            
+            overlayTitle.textContent = KING_CONFIG.phrases.levelFailed;
+            overlayText.textContent = `Tapi jangan menyerah, KING! Coba lagi dan raih kemenangan! 💪`;
+            overlayScore.textContent = `SKOR AKHIR: ${gameState.score}`;
+            gameOverlay.style.display = 'flex';
+            nextLevelBtn.innerHTML = '<i class="fas fa-redo"></i> COBA LAGI LEVEL INI 🔄';
+            nextLevelBtn.style.background = 'linear-gradient(135deg, #00bfff, #1e90ff)';
+            
+            // Play game over sound
+            playSound(300, 500);
+            setTimeout(() => playSound(250, 600), 300);
+            setTimeout(() => playSound(200, 700), 600);
+        }
+        
+        function updateStats() {
+            // Update SKU
+            const skuPercent = (gameState.sku / gameState.maxSku) * 100;
+            skuBar.style.width = `${skuPercent}%`;
+            skuValue.textContent = `${gameState.sku}/${gameState.maxSku}`;
+            
+            // Update EXP
+            const expPercent = (gameState.exp / gameState.maxExp) * 100;
+            expBar.style.width = `${expPercent}%`;
+            expValue.textContent = `${gameState.exp}/${gameState.maxExp}`;
+            
+            // Update score
+            scoreValue.textContent = gameState.score;
+            
+            // Update questions solved
+            solvedValue.textContent = `${gameState.questionsSolved}/${gameState.questionsPerLevel}`;
+            
+            // Level up if enough exp
+            if (gameState.exp >= gameState.maxExp) {
+                gameState.exp = 0;
+                gameState.maxSku += 5;
+                gameState.sku = gameState.maxSku;
+                
+                // Show level up effect
+                const floatingEmoji = document.createElement('div');
+                floatingEmoji.className = 'emoji';
+                floatingEmoji.textContent = '⬆️👑';
+                floatingEmoji.style.left = '50%';
+                floatingEmoji.style.fontSize = '4rem';
+                floatingEmoji.style.color = '#ffd700';
+                floatingEmoji.style.animation = 'emojiFloat 3s linear';
+                emojisContainer.appendChild(floatingEmoji);
+                
+                playSound(800, 300);
+                setTimeout(() => playSound(1000, 200), 200);
+            }
+        }
+        
+        function updateBadges() {
+            for (let i = 0; i < gameState.badges.length; i++) {
+                const badge = document.getElementById(`badge-${i+1}`);
+                if (gameState.badges[i]) {
+                    badge.classList.add('earned');
+                } else {
+                    badge.classList.remove('earned');
+                }
+            }
+        }
+        
+        function startTimer() {
+            clearInterval(gameState.timer);
+            
+            gameState.timer = setInterval(() => {
+                if (!gameState.gameActive) return;
+                
+                gameState.timeLeft--;
+                timeDisplay.textContent = gameState.timeLeft;
+                
+                // Visual effects for time
+                if (gameState.timeLeft <= 10) {
+                    timeDisplay.style.color = '#ff1493';
+                    timeDisplay.style.animation = 'pulse 0.5s infinite';
+                    
+                    if (gameState.timeLeft <= 5) {
+                        // Flash warning
+                        timeDisplay.style.animation = 'pulse 0.3s infinite';
+                        if (gameState.timeLeft % 2 === 0) {
+                            timeDisplay.style.color = '#ff1493';
+                        } else {
+                            timeDisplay.style.color = '#ffd700';
+                        }
+                    }
+                } else if (gameState.timeLeft <= 30) {
+                    timeDisplay.style.color = '#ffd700';
+                    timeDisplay.style.animation = 'none';
+                } else {
+                    timeDisplay.style.color = '#00bfff';
+                    timeDisplay.style.animation = 'none';
+                }
+                
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    gameOver();
+                }
+            }, 1000);
+        }
+        
+        // ===================== EVENT LISTENERS =====================
+        nextLevelBtn.addEventListener('click', () => {
+            gameOverlay.style.display = 'none';
+            
+            if (gameState.level >= levels.length) {
+                // Restart the game if finished
+                initGame();
+            } else {
+                gameState.level++;
+                gameState.questionsSolved = 0;
+                gameState.gameActive = true;
+                
+                // Show level transition
+                showLevelTransition();
+                
+                setTimeout(() => {
+                    loadLevel(gameState.level);
+                    generateQuestion();
+                    createProgressDots();
+                    startTimer();
+                    updateStats();
+                    
+                    // Show countdown for new level
+                    countdownOverlay.style.display = 'flex';
+                    startCountdown();
+                }, 2000);
+            }
+        });
+        
+        menuBtn.addEventListener('click', () => {
+            gameOverlay.style.display = 'none';
+            initGame();
+        });
+        
+        hintBtn.addEventListener('click', () => {
+            if (!gameState.gameActive) return;
+            
+            if (gameState.sku > 2) {
+                gameState.sku -= 2;
+                updateStats();
+                
+                // Highlight the correct answer briefly
+                const question = questionText.textContent;
+                const answerButtons = document.querySelectorAll('.answer-btn');
+                
+                answerButtons.forEach(btn => {
+                    const btnValue = parseInt(btn.textContent);
+                    const correctAnswer = eval(question.replace('=', '').replace('×', '*').replace('÷', '/'));
+                    
+                    if (btnValue === correctAnswer) {
+                        const originalBg = btn.style.background;
+                        btn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
+                        btn.style.transform = 'scale(1.1)';
+                        
+                        setTimeout(() => {
+                            btn.style.background = originalBg;
+                            btn.style.transform = 'scale(1)';
+                        }, 1500);
+                    }
+                });
+                
+                playSound(600, 300);
+                
+                // Add hint emoji
+                const floatingEmoji = document.createElement('div');
+                floatingEmoji.className = 'emoji';
+                floatingEmoji.textContent = '💡';
+                floatingEmoji.style.left = `${Math.random() * 80 + 10}%`;
+                floatingEmoji.style.fontSize = '3rem';
+                floatingEmoji.style.color = '#ffd700';
+                emojisContainer.appendChild(floatingEmoji);
+            } else {
+                // Not enough SKU for hint
+                const floatingEmoji = document.createElement('div');
+                floatingEmoji.className = 'emoji';
+                floatingEmoji.textContent = '😢';
+                floatingEmoji.style.left = `${Math.random() * 80 + 10}%`;
+                floatingEmoji.style.fontSize = '3rem';
+                floatingEmoji.style.color = '#ff1493';
+                emojisContainer.appendChild(floatingEmoji);
+                
+                playSound(300, 500);
+            }
+        });
+        
+        restartBtn.addEventListener('click', () => {
+            if (confirm("Restart level ini? Skormu akan disimpan tapi progress level ini diulang!")) {
+                gameState.questionsSolved = 0;
+                gameState.gameActive = true;
+                
+                loadLevel(gameState.level);
+                generateQuestion();
+                createProgressDots();
+                startTimer();
+                updateStats();
+                
+                // Show countdown for restart
+                countdownOverlay.style.display = 'flex';
+                startCountdown();
+            }
+        });
+        
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (!gameState.gameActive) return;
+            
+            // Number keys 1-4 for answer selection
+            if (e.key >= '1' && e.key <= '4') {
+                const index = parseInt(e.key) - 1;
+                const buttons = document.querySelectorAll('.answer-btn');
+                if (buttons[index]) {
+                    buttons[index].click();
+                    buttons[index].style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        buttons[index].style.transform = '';
+                    }, 100);
+                }
+            }
+            
+            // Spacebar for hint
+            if (e.key === ' ') {
+                e.preventDefault();
+                hintBtn.click();
+            }
+            
+            // R for restart
+            if (e.key === 'r' || e.key === 'R') {
+                restartBtn.click();
+            }
+            
+            // Enter for next level when overlay is shown
+            if (e.key === 'Enter' && gameOverlay.style.display === 'flex') {
+                nextLevelBtn.click();
+            }
+        });
+        
+        // ===================== INITIALIZE GAME =====================
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>
